@@ -43,7 +43,6 @@ int gotoXY(int x, int y)
 
 	//STD_OUTPUT_HANDLE 表示标准输出
 	//c 坐标值
-	//GetStdHandle(STD_OUTPUT_HANDLE) 获取当前标准输出句柄
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
 
 	return 0;
@@ -97,22 +96,17 @@ int welcomGame(void)
 	}
 
 	//输出菜单选项
-	//设置文本的属性
 	setColor(11);
 
-	//开始游戏
 	gotoXY(35, 10);
 	printf("1. 开始游戏");
 
-	//游戏说明
 	gotoXY(55, 10);
 	printf("2. 游戏说明");
 
-	//退出游戏
 	gotoXY(35, 12);
 	printf("3. 退出游戏");
 
-	//输出提示信息
 	gotoXY(27, 15);
 	printf("请选择[1 2 3]: ");
 
@@ -280,7 +274,7 @@ int showScoreTips(void)
 	return 0;
 }
 
-//读取文件中最高分  最高分保存在sava.txt文件中
+//读取文件中最高分,保存在sava.txt文件中
 int readFile(void)
 {
 	int ret = -1;
@@ -309,7 +303,6 @@ int readFile(void)
 	//3. 关闭文件
 	fclose(fp);
 
-	//atoi --> 将字符串的数字转化为数字  "123" --> 123
 	return atoi(buf);
 }
 
@@ -352,7 +345,6 @@ int initSnake(void)
 		//定位光标
 		gotoXY(tmp->x, tmp->y);
 
-		//第一个节点就是我们的蛇头节点
 		if (head == tmp)
 		{
 			printf("●");
@@ -374,9 +366,7 @@ int randFood(void)
 {
 	snake_t* tmp = NULL;
 
-	//随机的食物不能够出现在墙壁上
-	//随机的食物不能够出现在蛇身上
-	//随机的食物x坐标一定是偶数
+	//食物不能出现在墙壁上,不能出现在蛇身上,x坐标一定是偶数
 
 	//分配空间
 	foodNode = malloc(sizeof(snake_t));
@@ -404,7 +394,7 @@ int randFood(void)
 		//y坐标是（1,25）
 		foodNode->y = rand() % 25 + 1;  //(0,24) --> (1, 25)
 
-		//判断食物不能够在蛇身上
+		//判断食物不在蛇身
 		tmp = head;
 
 		while (NULL != tmp)
@@ -442,7 +432,6 @@ int moveSnake(void)
 	snake_t* tmp = NULL;
 	snake_t* save = NULL;
 
-	//分配新的节点
 	new = malloc(sizeof(snake_t));
 	if (NULL == new)
 	{
@@ -451,35 +440,30 @@ int moveSnake(void)
 	}
 	memset(new, 0, sizeof(snake_t));
 
-	//向上
 	if (UP == direction)
 	{
 		new->x = head->x;
 		new->y = head->y - 1;
 	}
 
-	//向下
 	if (DOWN == direction)
 	{
 		new->x = head->x;
 		new->y = head->y + 1;
 	}
 
-	//向左
 	if (LEFT == direction)
 	{
 		new->x = head->x - 2;
 		new->y = head->y;
 	}
 
-	//向右
 	if (RIGHT == direction)
 	{
 		new->x = head->x + 2;
 		new->y = head->y;
 	}
 
-	//头插法
 	new->next = head;
 	head = new;
 
@@ -505,10 +489,8 @@ int moveSnake(void)
 			tmp = tmp->next;
 		}
 
-		//吃掉一个食物 增加分数
 		score = score + add;
 
-		//随机食物
 		randFood();
 	}
 	else
@@ -591,14 +573,14 @@ int moveKeyControl(void)
 		}
 
 		//按下F8加速
-		if (GetAsyncKeyState(VK_F8))
+		if (GetAsyncKeyState(VK_F1))
 		{
 			//减少睡眠时间  但是睡眠的时间不能小于50ms
 			speedUp();
 		}
 
 		//按下F9减速
-		if (GetAsyncKeyState(VK_F9))
+		if (GetAsyncKeyState(VK_F2))
 		{
 			//增加睡眠的时间
 			speedDown();
