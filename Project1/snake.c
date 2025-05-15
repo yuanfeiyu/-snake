@@ -24,7 +24,6 @@ snake_t* head = NULL;
 //食物的节点指针
 snake_t* foodNode = NULL;
 
-//设置文本的颜色  c就是颜色值
 int setColor(int c)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);
@@ -139,11 +138,10 @@ int aboutGame(void)
 	gotoXY(44, 3);
 	printf("游戏说明");
 
-	//绘制上下左右边框
-	//控制行
+
 	for (i = 6; i <= 22; i++)
 	{
-		//控制列
+
 		for (j = 20; j <= 75; j++)
 		{
 			//上下边框 =
@@ -203,10 +201,10 @@ int printMap(void)
 	//清屏
 	system("cls");
 
-	//控制行
+
 	for (i = 0; i <= 26; i++)
 	{
-		//控制列
+
 		for (j = 0; j <= 56; j = j + 2)
 		{
 			//定位光标
@@ -349,7 +347,7 @@ int initSnake(void)
 	tmp = head;
 	while (NULL != tmp)
 	{
-		//设置蛇的颜色 14 黄色
+		
 		setColor(14);
 		//定位光标
 		gotoXY(tmp->x, tmp->y);
