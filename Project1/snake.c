@@ -163,7 +163,7 @@ int aboutGame(void)
 
 	setColor(11);
 	gotoXY(30, 11);
-	printf("2. F1加速前进，F2减速前进");
+	printf("2. F1加速，F2减速；速度越快，每个食物得分越高");
 
 	setColor(11);
 	gotoXY(30, 14);
@@ -534,26 +534,22 @@ int moveKeyControl(void)
 		//显示右侧的小提示
 		showScoreTips();
 
-		//向上
 		if (GetAsyncKeyState(VK_UP) && direction != DOWN)
 		{
 			direction = UP;
 		}
 
-		//向下
 		if (GetAsyncKeyState(VK_DOWN) && direction != UP)
 		{
 			direction = DOWN;
 		}
 
 
-		//向左
 		if (GetAsyncKeyState(VK_LEFT) && direction != RIGHT)
 		{
 			direction = LEFT;
 		}
 
-		//向右
 		if (GetAsyncKeyState(VK_RIGHT) && direction != LEFT)
 		{
 			direction = RIGHT;
@@ -591,10 +587,8 @@ int moveKeyControl(void)
 		{
 			//表示用户按下ESC键结束游戏
 			endStatus = 3;
-
 			endGame();
 
-			//exit(1);
 			break;
 		}
 
