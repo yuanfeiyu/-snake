@@ -792,7 +792,7 @@ int endGame(void)
 		if (score > highScore)
 		{
 			setColor(10);
-			gotoXY(38, 16);
+			gotoXY(43, 16);
 			printf("新纪录！！！");
 
 			//将最高分写入文件
@@ -888,3 +888,10 @@ int destroySnake(void)
 
 	return 0;
 }
+
+
+
+
+
+
+
